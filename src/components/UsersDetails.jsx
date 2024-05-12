@@ -1,14 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import { useFetchUSerDetails } from "../hooks/queries";
 
 const UsersDetails = () => {
   const { id } = useParams();
-  const { data, isPending, error } = useQuery({
-    queryKey: ["users",id],
-    queryFn: ({queryKey}) =>
-      axios.get(`https://jsonplaceholder.typicode.com/users/${queryKey[1]}`),
-  });
+  const { data, isPending, error } = useFetchUSerDetails(id);
   console.log(data);
   if (isPending) return <h1>LOADING</h1>;
   console.log(error)
